@@ -10,6 +10,6 @@ export default defineConfig({
       interval: 1000,
     },
   },
-  base: "/app/",
+  base: "/mojisu-count/",
   plugins: [react()],
 });
