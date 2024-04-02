@@ -43,7 +43,8 @@ jobs:
         run: yarn install --immutable
 
       - name: Build
-        run: npm run build
+        run: yarn build
+        working-directory: ./app
       
       - name: Setup Pages
         uses: actions/configure-pages@v4
