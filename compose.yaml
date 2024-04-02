@@ -1,4 +1,3 @@
-
 version: '3.8'
 services:
   app:
@@ -7,12 +6,9 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - ./app:/usr/src/app
-      - node_modules_volume:/usr/src/app/node_modules
+      - type: bind
+        source: ./app
+        target: /usr/src/app
     command: yarn dev
     ports:
       - 5173:5173
-    # environment:
-    #   - CHOKIDAR_USEPOLLING=true
-volumes:
-  node_modules_volume:
