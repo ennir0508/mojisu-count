@@ -38,19 +38,11 @@ jobs:
           # cache: 'npm'
           cache: 'yarn'
           cache-dependency-path: "app"
-      
-      - name: Cache Dependency
-        uses: actions/cache@v3
-        id: cache_dependency
-        env:
-          cache-name: cache-dependency
-        with:
-          path: "**/node_modules"
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('yarn.lock') }}
 
       - name: Install dependencies
         # run: npm ci
         run: yarn install --immutable
+        working-directory: ./app
 
       - name: Build
         run: yarn build
