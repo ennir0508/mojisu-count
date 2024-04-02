@@ -1,21 +1,24 @@
 # 静的コンテンツを GitHub Pages にデプロイするためのシンプルなワークフロー
 name: Deploy static content to Pages
 
+# main ブランチにコミットorマージされた場合、Github Pageを更新する
 on:
-  # デフォルトブランチを対象としたプッシュ時にで実行されます
   push:
     branches: ['main']
+  pull_request:
+    branches: ['main']
+    types: [closed]
 
-  # Actions タブから手動でワークフローを実行できるようにします
+  # Actions タブから手動でワークフローを実行可能
   workflow_dispatch:
 
-# GITHUB_TOKEN のパーミッションを設定し、GitHub Pages へのデプロイを許可します
+# GITHUB_TOKEN のパーミッションを設定し、GitHub Pages へのデプロイを許可する
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# 1 つの同時デプロイメントを可能にする
+# 1つの同時デプロイメントを可能にする
 concurrency:
   group: 'pages'
   cancel-in-progress: true
@@ -30,33 +33,24 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          # cache: 'npm'
           cache: 'yarn'
           cache-dependency-path: "app"
-
       - name: Install dependencies
-        # run: npm ci
         run: yarn install --immutable
         working-directory: ./app
-
       - name: Build
         run: yarn build
-        working-directory: ./app
-      
+        working-directory: ./app      
       - name: Setup Pages
         uses: actions/configure-pages@v4
-      
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # dist フォルダーのアップロード
           path: './app/dist'
-      
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
