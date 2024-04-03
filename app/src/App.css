@@ -1,42 +1,90 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+/* Reset CSS */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 全体の背景色やフォント設定など */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+/* メインコンテンツ */
+main {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* タイトル */
+.title-box {
+  display: flex;
+  justify-content: center;
+}
+
+.title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  padding-right: 4px;
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* テキストエリア */
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  background-color: #f8f8f8;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  resize: none; /* テキストエリアのリサイズを禁止 */
+  transition: background-color 0.3s; /* 背景色の変化をアニメーション化 */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+/* テキストエリアのホバーエフェクト */
+textarea:hover {
+  background-color: #eaeaea;
 }
 
-.card {
-  padding: 2em;
+/* テキストエリアのフォーカス時のスタイル */
+textarea:focus {
+  outline: none; /* フォーカス時のアウトラインを非表示に */
+  background-color: #fff;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* フォーカス時の影を追加 */
 }
 
-.read-the-docs {
-  color: #888;
+/* 結果テーブル */
+.result {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* 結果テーブルのアイテム */
+.result-item {
+  border-bottom: 1px solid #ccc;
+}
+
+/* 結果テーブルのタイトル */
+.result-item-title {
+  padding: 10px;
+  font-weight: bold;
+}
+
+/* 結果テーブルの値 */
+.result-item-value {
+  padding: 10px;
+  display: flex;
+  justify-content: end;
+}
+
+/* 結果テーブルの単位 */
+.result-item-unit {
+  padding: 10px;
 }
