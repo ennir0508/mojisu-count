@@ -1,35 +1,100 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from "react";
+import "./App.css";
+import CalcIcon from "./assets/calculator.svg";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [usertext, setUsertext] = useState("");
+
+  useEffect(() => {
+    document.title = "文字数カウント";
+  }, []);
+
+  const usertextRow = (str: string) => {
+    if (str === "") {
+      return 0;
+    }
+    return str.split("\n").length;
+  };
+
+  const usertextParagraph = (str: string) => {
+    return str.split("\n").reduce((paraNum: number, text: string) => {
+      if (text !== "") {
+        return paraNum + 1;
+      }
+      return paraNum;
+    }, 0);
+  };
+
+  const usertextPaper = (str: string) => {
+    if (str === "") {
+      return 0;
+    }
+    return Math.ceil(
+      // 改行毎に原稿用紙に記載した場合の行数をカウントする
+      str.split("\n").reduce((paperRowNum: number, text: string) => {
+        // 空行は1行とする
+        if (text === "") {
+          return paperRowNum + 1;
+        }
+        // 1行20文字として、行数をカウントする
+        return paperRowNum + Math.ceil(text.length / 20);
+      }, 0) / 20,
+    );
+  };
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <main>
+        <div>
+          <div className="title-box">
+            <h1 className="title">文字数カウント</h1>
+            <img src={CalcIcon} alt="" width={30} height={30} />
+          </div>
+          <textarea
+            name="text"
+            id="usertext"
+            className="usertext"
+            cols={30}
+            rows={10}
+            value={usertext}
+            onChange={(e) => setUsertext(e.target.value)}
+            placeholder="ここに入力してね&#13;例) 使ってくれてありがとう。"
+          ></textarea>
+          <table className="result">
+            <tr className="result-item">
+              <td className="result-item-title">文字数 (スペースを含む)</td>
+              <td className="result-item-value">{usertext.length}</td>
+              <td className="result-item-unit">文字</td>
+            </tr>
+            <tr className="result-item">
+              <td className="result-item-title">文字数 (スペースを除く)</td>
+              <td className="result-item-value">
+                {usertext.replace(/\s/gi, "").length}
+              </td>
+              <td className="result-item-unit">文字</td>
+            </tr>
+            <tr className="result-item">
+              <td className="result-item-title">行数</td>
+              <td className="result-item-value">{usertextRow(usertext)}</td>
+              <td className="result-item-unit">行</td>
+            </tr>
+            <tr className="result-item">
+              <td className="result-item-title">段落数</td>
+              <td className="result-item-value">
+                {usertextParagraph(usertext)}
+              </td>
+              <td className="result-item-unit">段落</td>
+            </tr>
+            <tr className="result-item">
+              <td className="result-item-title">原稿用紙換算</td>
+              <td className="result-item-value">{usertextPaper(usertext)}</td>
+              <td className="result-item-unit">枚分</td>
+            </tr>
+          </table>
+        </div>
+      </main>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
