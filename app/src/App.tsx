@@ -1,4 +1,8 @@
 import { useEffect, useState } from "react";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEraser } from "@fortawesome/free-solid-svg-icons";
+
 import "./App.css";
 import CalcIcon from "./assets/calculator.svg";
 
@@ -91,6 +95,12 @@ function App() {
               <td className="result-item-unit">枚分</td>
             </tr>
           </table>
+          <div className="btn-box">
+            <button className="clear-button" onClick={() => setUsertext("")}>
+              <FontAwesomeIcon icon={faEraser} />
+              クリア
+            </button>
+          </div>
         </div>
       </main>
     </>

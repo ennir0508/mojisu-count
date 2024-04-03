@@ -88,3 +88,32 @@ textarea:focus {
 .result-item-unit {
   padding: 10px;
 }
+
+.btn-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding-top: 20px;
+}
+
+/* ボタンのスタイル */
+.clear-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #adb5bd;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.clear-button:hover {
+  background-color: #6c757d;
+}
+
+/* ボタンのアイコン */
+.clear-button i {
+  margin-right: 5px;
+}
